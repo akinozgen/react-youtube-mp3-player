@@ -63,6 +63,11 @@ body {
   height: 35px;
 }
 
+.player .top .cover img {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, .5);
+  z-index: 2;
+}
+
 .player .seekbar .progress {
   height: 5px;
   border-radius: 0;
@@ -137,6 +142,18 @@ body {
   width: 100%;
 }
 
+.player .playlist .list-group .list-group-item span.playlist-content {
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+}
+
+.player .playlist .list-group .list-group-item span.playlist-content.expanded {
+  visibility: visible;
+  height: auto;
+  overflow: auto;
+}
+
 .player .playlist .list-group::-webkit-scrollbar {
   width: 6px;
 }
@@ -175,6 +192,21 @@ body {
 .drag-handle {
   opacity: .5;
   cursor: move !important;
+}
+
+.player .top .cover {
+  position: relative;
+}
+
+.player .top .cover .backdrop {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-position: center;
+  background-size: 150%;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  z-index: 1;
 }
 
 @media only screen and (max-width: 600px) {
@@ -296,16 +328,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .player .top .cover .backdrop {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-position: center;
-    background-size: cover;
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
+    z-index: 1;
   }
 
   .player .top .cover img {
