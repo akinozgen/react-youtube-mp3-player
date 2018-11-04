@@ -8,11 +8,11 @@ export function array_shuffle(o) {
 export default function Controls() {
   const { state, dispatch } = useContext(Store);
   const [queuePosition, updateQueuePosition] = useState(state.queue_position || 0);
-  const [queue, updateQueue] = useState(state.queue || []);
 
   function changePlayStatus() {
     if (state.is_playing) pause();
-    else play();
+    else if (state.queue.length !== 0) play();
+    else alert('Queue is empty!');
   }
 
   function changeQueuePosition(newPosition) {
@@ -32,10 +32,12 @@ export default function Controls() {
   }
 
   function backward() {
+    if (state.queue.length === 0) return;
     changeQueuePosition(queuePosition === 0 ? state.queue.length - 1 : queuePosition - 1);
   }
 
   function forward() {
+    if (state.queue.length === 0) return;
     changeQueuePosition(queuePosition === state.queue.length - 1 ? 0 : queuePosition + 1);
   }
 
@@ -44,24 +46,29 @@ export default function Controls() {
     const afterCurrent = state.queue.slice(queuePosition + 1, state.queue.length);
 
     const newQueue = [...beforeCurrent, state.current_song, ...array_shuffle(afterCurrent)];
-    updateQueue(newQueue);
     dispatch({ type: 'shuffleQueue', payload: newQueue });
   }
 
   function repeat() {
-
+    // to be implemented
   }
 
   function save() {
+    const playlistName = prompt('Playlist Name: ', 'My Default Playlist');
+    const playlist = { name: playlistName, items: state.queue };
 
+    dispatch({ type: 'updatePlaylists', payload: [...state.playlists, playlist] });
   }
 
   function clear() {
-
+    dispatch({ type: 'updateQueue', payload: [] });
+    dispatch({ type: 'updateIsPlaying', payload: false });
+    dispatch({ type: 'updateCurrentSong', payload: null });
+    dispatch({ type: 'updateQueuePosition', payload: 0 });
   }
 
   return <div className="controls">
-    <button className="btn btn-transparent control-button playlist-action text-white">
+    <button className="btn btn-transparent control-button playlist-action text-white" onClick={save}>
       <i className="fa fa-save"></i>
     </button>
     <button className="btn btn-transparent control-button playlist-action text-white" onClick={shuffle}>
@@ -79,7 +86,7 @@ export default function Controls() {
     <button className="btn btn-transparent control-button playlist-action text-white">
       <i className="fa fa-redo-alt"></i>
     </button>
-    <button className="btn btn-transparent control-button playlist-action text-white">
+    <button className="btn btn-transparent control-button playlist-action text-white" onClick={clear}>
       <i className="fa fa-trash"></i>
     </button>
   </div>;
