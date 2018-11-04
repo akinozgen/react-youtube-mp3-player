@@ -7,7 +7,7 @@ export default function Item(item) {
   const { state } = useContext(Store);
 
   const { queue_position } = state;
-  const current = item.etag === state.queue[queue_position].etag;
+  const current = item.index === queue_position;
 
   return <li className={`list-group-item ${current ? 'active' : ''}`}>
     <span>

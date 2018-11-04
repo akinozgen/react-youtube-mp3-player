@@ -18,6 +18,12 @@ export default function reducer(state, action) {
         queue: [...state.queue, action.payload]
       };
       break;
+    case 'shuffleQueue':
+      return {
+        ...state,
+        queue: action.payload
+      };
+      break;
 
     case 'updateSearchResults':
       return {

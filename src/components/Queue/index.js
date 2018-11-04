@@ -7,6 +7,6 @@ export default function Queue() {
   const { state, dispatch } = useContext(Store);
 
   return <ul className="list-group playlist-content tab-pane fade show active" id="queue" role="tabpanel" aria-labelledby="queue-tab">
-    {state.queue.map((item, index) => <div key={index}><Item {...item} /></div>)}
+    {state.queue.map((item, index) => <Item key={index} index={index} {...item} />)}
   </ul>;
 }
