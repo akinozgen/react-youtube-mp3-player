@@ -12,9 +12,6 @@ export default function Cover() {
   }
 
   return <div className="cover">
-    <div className="backdrop" style={{
-      backgroundImage: `url('${getCover(state.current_song)}')`
-    }}></div>
     <img src={getCover(state.current_song)} alt="/" />
   </div>;
 }

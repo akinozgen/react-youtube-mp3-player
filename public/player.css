@@ -142,6 +142,10 @@ body {
   width: 100%;
 }
 
+.player .playlist .list-group .list-group-item .playlist-content .list-group {
+  display: block;
+}
+
 .player .playlist .list-group .list-group-item span.playlist-content {
   visibility: hidden;
   height: 0;
@@ -182,6 +186,7 @@ body {
 /* Track */
 .player .playlist .list-group::-webkit-scrollbar-track {
   background: white;
+  width: 5px;
 }
 
 /* Handle */
@@ -206,7 +211,6 @@ body {
   background-size: 150%;
   filter: blur(8px);
   -webkit-filter: blur(8px);
-  z-index: 1;
 }
 
 @media only screen and (max-width: 600px) {
