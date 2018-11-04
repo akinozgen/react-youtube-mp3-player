@@ -5,7 +5,9 @@ const Store = React.createContext({
   queue: [],
   search_query: '',
   search_results: [],
-  current_song: null
+  current_song: null,
+  is_playing: false,
+  queue_position: 0
 });
 
 export default Store;

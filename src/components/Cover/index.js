@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import Store from '../../context';
 
 export default function Cover() {
+  const { state } = useContext(Store);
+
+  function getCover(item) {
+    if (item !== null)
+      return item.snippet.thumbnails.high.url;
+    else
+      return 'http://placehold.it/1600x900?text=Not Playing';
+  }
+
   return <div className="cover">
     <div className="backdrop" style={{
-      backgroundImage: "url('https://img.youtube.com/vi/qu577tNp1hA/maxresdefault.jpg')"
+      backgroundImage: `url('${getCover(state.current_song)}')`
     }}></div>
-    <img src="https://img.youtube.com/vi/qu577tNp1hA/maxresdefault.jpg" alt="/" />
+    <img src={getCover(state.current_song)} alt="/" />
   </div>;
 }

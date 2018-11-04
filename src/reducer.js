@@ -5,29 +5,43 @@ export default function reducer(state, action) {
 
       break;
 
-    case 'getPlaylists':
-
-      break;
-
-    case 'setCurrentSong':
-
+    case 'updateCurrentSong':
+      return {
+        ...state,
+        current_song: action.payload
+      };
       break;
 
     case 'updateQueue':
-
+      return {
+        ...state,
+        queue: [...state.queue, action.payload]
+      };
       break;
 
     case 'updateSearchResults':
-
+      return {
+        ...state,
+        search_results: action.payload
+      };
       break;
 
-    case 'getSearchResults':
+    case 'updateSearchQuery':
+      return { ...state, search_query: action.payload };
+      break;
 
+    case 'updateIsPlaying':
+      return { ...state, is_playing: action.payload }
+      break;
+
+    case 'updateQueuePosition':
+      return { ...state, queue_position: action.payload };
       break;
 
     default:
-      return state;
+
       break;
   }
+
 
 }

@@ -1,21 +1,12 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+
+import Store from '../../context';
+import Item from './item';
 
 export default function Queue() {
+  const { state, dispatch } = useContext(Store);
+
   return <ul className="list-group playlist-content tab-pane fade show active" id="queue" role="tabpanel" aria-labelledby="queue-tab">
-    <li className="list-group-item">
-      <span>
-        <button className="btn btn-transparent btn-sm drag-handle">
-          <i className="fa fa-grip-vertical"></i>
-        </button>
-      </span>
-      <span>
-        The Dø - Despair, Hangover & Ecstasy
-      </span>
-      <span>
-        <button className="btn btn-transparent btn-sm">
-          <i className="fa fa-times"></i>
-        </button>
-      </span>
-    </li>
+    {state.queue.map((item, index) => <div key={index}><Item {...item} /></div>)}
   </ul>;
 }

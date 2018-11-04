@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Store from '../../context';
+
+export function getTitle(item) {
+  return item !== null ? item.snippet.title : 'Not Playing';
+};
 
 export default function Meta() {
+  const { state } = useContext(Store);
+
   return <div className="meta">
     <div className="seekbar">
       <div className="progress">
@@ -9,7 +16,7 @@ export default function Meta() {
       </div>
     </div>
     <div className="title">
-      The Dø | A Take Away Show
-  </div>
+      {getTitle(state.current_song)}
+    </div>
   </div>;
 }

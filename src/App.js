@@ -16,11 +16,11 @@ function App() {
     'state'
   );
 
-  return <Store.Provider>
+  return (<Store.Provider value={{ state, dispatch }}>
     <Container>
       <Player />
     </Container>
-  </Store.Provider>
+  </Store.Provider>);
 }
 
 export default App;

@@ -4,7 +4,7 @@ body {
 }
 
 .container {
-  margin-top: 50px !important;
+  margin-top: 50px;
 }
 
 .player {
@@ -44,7 +44,8 @@ body {
 }
 
 .player .controls .control-button i.fa {
-  font-size: 12px
+  font-size: 12px;
+  transform: translateY(-2px)
 }
 
 .player .controls .control-button:last-child {
@@ -127,7 +128,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap
+  flex-wrap: wrap;
+  z-index: 0;
 }
 
 .player .playlist .list-group .list-group-item .playlist-content {
@@ -137,6 +139,10 @@ body {
 
 .player .playlist .list-group::-webkit-scrollbar {
   width: 6px;
+}
+
+.search-control {
+  display: block;
 }
 
 .search-control .search-field {
