@@ -8,7 +8,8 @@ export default function Item(searchResult) {
   const { videoId } = searchResult.id;
 
   function onClick(id) {
-    dispatch({ type: 'updateQueue', payload: state.search_results.filter(_ => _.id.videoId === id)[0] });
+    const queue = [...state.queue, state.search_results.filter(_ => _.id.videoId === id)[0]];
+    dispatch({ type: 'updateQueue', payload: queue });
   }
 
   return <div className="list-group-item">
