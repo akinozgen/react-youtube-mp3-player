@@ -2,7 +2,7 @@ export default function reducer(state, action) {
 
   switch (action.type) {
     case 'updatePlaylists':
-
+      return { ...state, playlists: action.payload }
       break;
 
     case 'updateCurrentSong':
@@ -15,7 +15,7 @@ export default function reducer(state, action) {
     case 'updateQueue':
       return {
         ...state,
-        queue: [...state.queue, action.payload]
+        queue: action.payload
       };
       break;
     case 'shuffleQueue':
