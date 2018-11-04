@@ -1,28 +1,26 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, useContext, useReducer } from 'react';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+import Store from './context';
+import reducer from './reducer';
+
+import { usePersistedContext, usePersistedReducer } from './usePersist';
+
+import { Player } from './components/Player';
+import Container from './components/Container';
+
+function App() {
+  const globalStore = usePersistedContext(useContext(Store), 'state');
+
+  const [state, dispatch] = usePersistedReducer(
+    useReducer(reducer, globalStore),
+    'state'
+  );
+
+  return <Store.Provider>
+    <Container>
+      <Player />
+    </Container>
+  </Store.Provider>
 }
 
 export default App;
