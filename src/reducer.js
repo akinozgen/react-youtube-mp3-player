@@ -44,6 +44,14 @@ export default function reducer(state, action) {
       return { ...state, queue_position: action.payload };
       break;
 
+    case 'updateCurrentSongUrl':
+      return { ...state, current_song_url: action.payload };
+      break;
+
+    case 'updateProgress':
+      return { ...state, progress: action.payload };
+      break;
+
     default:
 
       break;

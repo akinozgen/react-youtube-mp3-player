@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Store from '../../context';
+import API_CONFIG from '../../api_config';
 
 export function array_shuffle(o) {
   return o.sort(function () { return 0.5 - Math.random() });
@@ -8,11 +9,20 @@ export function array_shuffle(o) {
 export default function Controls() {
   const { state, dispatch } = useContext(Store);
   const [queuePosition, updateQueuePosition] = useState(state.queue_position || 0);
+  const [audioUrl, updateAudioUrl] = useState(state.current_song_url);
+  let audioPlayer = undefined;
 
   function changePlayStatus() {
     if (state.is_playing) pause();
     else if (state.queue.length !== 0) play();
     else alert('Queue is empty!');
+  }
+
+  function onTimeUpdate(_) {
+    const totalTime = Math.floor(_.target.duration);
+    const currentTime = Math.floor(_.target.currentTime);
+
+    dispatch({ type: 'updateProgress', payload: Math.floor((currentTime / totalTime) * 100) });
   }
 
   function changeQueuePosition(newPosition) {
@@ -23,12 +33,24 @@ export default function Controls() {
   }
 
   function play(position = null) {
-    dispatch({ type: 'updateCurrentSong', payload: state.queue[position !== null ? position : queuePosition] });
+    const currentSong = state.queue[position !== null ? position : queuePosition];
+    const newAudioUrl = API_CONFIG.yt_mp3_endpoint({ videoId: currentSong.id.videoId });
+    dispatch({ type: 'updateCurrentSong', payload: currentSong });
     dispatch({ type: 'updateIsPlaying', payload: true });
+    dispatch({ type: 'updateCurrentSongUrl', payload: newAudioUrl });
+
+    updateAudioUrl(newAudioUrl);
+
+    if (typeof audioPlayer !== 'object' && audioPlayer.src !== newAudioUrl)
+      audioPlayer.src = audioUrl;
+
+    if (typeof audioPlayer !== 'object')
+      audioPlayer.play();
   }
 
   function pause() {
     dispatch({ type: 'updateIsPlaying', payload: false });
+    audioPlayer.pause();
   }
 
   function backward() {
@@ -69,7 +91,23 @@ export default function Controls() {
     dispatch({ type: 'updateQueuePosition', payload: 0 });
   }
 
+  function onLoadError(_) {
+    if (_.target.error.code === 4) {
+      forward();
+    }
+  }
+
   return <div className="controls">
+    <audio
+      src={audioUrl}
+      ref={_ => audioPlayer = _}
+      autoPlay
+      onEnded={forward}
+      onLoadStart={_ => {
+        _.target.ontimeupdate = onTimeUpdate;
+        _.target.onerror = onLoadError;
+      }}>
+    </audio>
     <button className="btn btn-transparent control-button playlist-action text-white" onClick={save}>
       <i className="fa fa-save"></i>
     </button>
@@ -91,5 +129,5 @@ export default function Controls() {
     <button className="btn btn-transparent control-button playlist-action text-white" onClick={clear}>
       <i className="fa fa-trash"></i>
     </button>
-  </div>;
+  </div >;
 }
