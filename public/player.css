@@ -12,7 +12,7 @@ body {
   margin: 0 auto;
   border-radius: 5px;
   overflow: hidden;
-  background: #f65599;
+  background: linear-gradient(135deg, #ff3c00 0%, #d900c6 100%);
   box-shadow: 0 0 0px 5px #9612756c;
 }
 
@@ -39,7 +39,7 @@ body {
   width: 45px;
   height: 45px;
   padding: 0;
-  background: linear-gradient(135deg, #FF57B9 0%, #A704FD 100%);
+  background: linear-gradient(135deg, #17dbfe 0%, #4d12bc 100%);
   border: 0;
 }
 
@@ -78,7 +78,7 @@ body {
   width: 55px;
   height: 55px;
   height: 55px;
-  background: linear-gradient(135deg, #C56CD6 0%, #3425AF 100%);
+  background: linear-gradient(135deg, #ee20d6 0%, #0a2fb6 100%);
 }
 
 .player .seekbar .progress .progress-bar {
