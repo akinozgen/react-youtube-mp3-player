@@ -16,3 +16,4 @@ serviceWorker.register();
 //               forward, backward -> change src
 //               onfinish -> forward & (on last queue item -> goto first)
 //               is_repeat(1) -> !forward
+// TODO: Move functions outside the components and export them
