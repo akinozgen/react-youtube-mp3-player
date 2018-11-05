@@ -42,6 +42,8 @@ export default function Controls() {
   }
 
   function shuffle() {
+    if (state.queue.length === 0) return;
+
     const beforeCurrent = state.queue.slice(0, queuePosition);
     const afterCurrent = state.queue.slice(queuePosition + 1, state.queue.length);
 

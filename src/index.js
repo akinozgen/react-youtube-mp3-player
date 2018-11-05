@@ -8,7 +8,6 @@ ReactDOM.render(<App />, document.getElementById('root'));
 serviceWorker.register();
 
 // TODO: List group text wraps to be fixed
-// TODO: Forward & Backward error when queue empty to be fixed
 // TODO: Get mp3 url of current song when play triggered
 // TODO: Play audio with <audio> to be implemented
 // TODO: <audio> onprogress -> Progressbar,
@@ -17,4 +16,3 @@ serviceWorker.register();
 //               onfinish -> forward & (on last queue item -> goto first)
 //               is_repeat(1) -> !forward
 // TODO: Move functions outside the components and export them
-// TODO: Shuffle bugs when queue empty
