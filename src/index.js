@@ -17,3 +17,4 @@ serviceWorker.register();
 //               onfinish -> forward & (on last queue item -> goto first)
 //               is_repeat(1) -> !forward
 // TODO: Move functions outside the components and export them
+// TODO: Shuffle bugs when queue empty
