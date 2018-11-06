@@ -10,7 +10,6 @@ export default function Controls() {
   const { state, dispatch } = useContext(Store);
   const [queuePosition, updateQueuePosition] = useState(state.queue_position || 0);
   const [audioUrl, updateAudioUrl] = useState(state.current_song_url);
-  let audioPlayer = undefined;
 
   function changePlayStatus() {
     if (state.is_playing) pause();
@@ -35,23 +34,25 @@ export default function Controls() {
   function play(position = null) {
     const currentSong = state.queue[position !== null ? position : queuePosition];
     const newAudioUrl = API_CONFIG.yt_mp3_endpoint({ videoId: currentSong.id.videoId });
+
     dispatch({ type: 'updateCurrentSong', payload: currentSong });
     dispatch({ type: 'updateIsPlaying', payload: true });
     dispatch({ type: 'updateCurrentSongUrl', payload: newAudioUrl });
 
     updateAudioUrl(newAudioUrl);
+
+    if (typeof window.audioPlayer === 'object' && window.audioPlayer.src !== newAudioUrl)
+      window.audioPlayer.src = audioUrl;
+
+    if (typeof window.audioPlayer === 'object')
+      window.audioPlayer.play();
+
     document.title = currentSong.snippet.title;
-
-    if (typeof audioPlayer !== 'object' && audioPlayer.src !== newAudioUrl)
-      audioPlayer.src = audioUrl;
-
-    if (typeof audioPlayer !== 'object')
-      audioPlayer.play();
   }
 
   function pause() {
     dispatch({ type: 'updateIsPlaying', payload: false });
-    audioPlayer.pause();
+    window.audioPlayer.pause();
   }
 
   function backward() {
@@ -102,7 +103,7 @@ export default function Controls() {
   return <div className="controls">
     <audio
       src={audioUrl}
-      ref={_ => audioPlayer = _}
+      ref={_ => window.audioPlayer = _}
       autoPlay
       onEnded={forward}
       onLoadStart={_ => {
