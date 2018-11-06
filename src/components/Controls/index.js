@@ -40,6 +40,7 @@ export default function Controls() {
     dispatch({ type: 'updateCurrentSongUrl', payload: newAudioUrl });
 
     updateAudioUrl(newAudioUrl);
+    document.title = currentSong.snippet.title;
 
     if (typeof audioPlayer !== 'object' && audioPlayer.src !== newAudioUrl)
       audioPlayer.src = audioUrl;
