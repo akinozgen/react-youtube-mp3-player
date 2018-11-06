@@ -6,7 +6,8 @@
     "axios": "^0.18.0",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "react-sortable-hoc": "^0.8.3"
   },
   "scripts": {
     "start": "react-scripts start",

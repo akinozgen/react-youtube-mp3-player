@@ -6,7 +6,7 @@ export default function Item(item) {
 
   const { queue_position } = state;
   const current = item.index === queue_position;
-
+  
   function remove() {
     const newQueue = state.queue.filter((_, i) => i !== item.index);
     dispatch({ type: 'updateQueue', payload: newQueue })
@@ -20,9 +20,7 @@ export default function Item(item) {
 
   return <li className={`list-group-item ${current ? 'active' : ''}`}>
     <span>
-      <button className="btn btn-transparent btn-sm drag-handle">
-        <i className="fa fa-grip-vertical"></i>
-      </button>
+      {item.children}
     </span>
     <span>
       {item.snippet.title}
