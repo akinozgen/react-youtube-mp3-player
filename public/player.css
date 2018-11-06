@@ -133,8 +133,24 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
   z-index: 0;
+}
+
+.player .list-group .list-group-item span:nth-child(2) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player .list-group .list-group-item span:nth-child(1),
+.player .list-group .list-group-item span:nth-child(3) {
+  white-space: inherit;
+  overflow: inherit;
+  text-overflow: inherit;
+}
+
+.player .list-group[aria-labelledby="playlist-tab"] .list-group-item {
+  flex-wrap: wrap;
 }
 
 .player .playlist .list-group .list-group-item .playlist-content {
@@ -156,6 +172,18 @@ body {
   visibility: visible;
   height: auto;
   overflow: auto;
+}
+
+.player .playlist .list-group .list-group-item span.playlist-content.expanded
+  .list-group-item {
+    flex-wrap: nowrap;
+  }
+
+.player .playlist .list-group .list-group-item span.playlist-content.expanded
+  .list-group-item span:first-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .player .playlist .list-group::-webkit-scrollbar {
