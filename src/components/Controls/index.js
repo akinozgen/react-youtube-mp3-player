@@ -84,6 +84,9 @@ export default function Controls() {
     const playlistName = prompt('Playlist Name: ', 'My Default Playlist');
     const playlist = { name: playlistName, items: state.queue };
 
+    if (!(playlist.name.length >= 2))
+      return;
+
     dispatch({ type: 'updatePlaylists', payload: [...state.playlists, playlist] });
   }
 
