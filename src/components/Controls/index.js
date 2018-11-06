@@ -57,12 +57,12 @@ export default function Controls() {
 
   function backward() {
     if (state.queue.length === 0) return;
-    changeQueuePosition(queuePosition === 0 ? state.queue.length - 1 : queuePosition - 1);
+    changeQueuePosition(state.queue_position === 0 ? state.queue.length - 1 : state.queue_position - 1);
   }
 
   function forward() {
     if (state.queue.length === 0) return;
-    changeQueuePosition(queuePosition === state.queue.length - 1 ? 0 : queuePosition + 1);
+    changeQueuePosition(state.queue_position === state.queue.length - 1 ? 0 : state.queue_position + 1);
   }
 
   function shuffle() {
