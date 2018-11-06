@@ -213,7 +213,7 @@ body {
   -webkit-filter: blur(8px);
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 480px) {
   .container {
     margin: 0;
     padding: 0;
@@ -246,6 +246,15 @@ body {
 
   .player .top {
     margin-bottom: 15px;
+    height: inherit;
+    flex: 1;
+    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .player .bottom {
+    flex: 2;
   }
 
   .library-control {
@@ -261,9 +270,39 @@ body {
   .player .library-control button.active {
     color: palevioletred;
   }
+
+  .player .cover {
+    width: 40%;
+    padding: 20px;
+    flex: 1;
+  }
+
+  .player .meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex: 2;
+    padding: 0 20px 0 0;
+  }
+
+  .player .meta .seekbar {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .player .controls {
+    max-height: 90px;
+  }
+
+  .player .top .controls {
+    width: 100%;
+    margin-top: 10px;
+  }
 }
 
-@media only screen and (min-device-width: 480px) and (max-device-width: 1024px) and (orientation: landscape) {
+@media only screen and (min-width: 480px) and (max-width: 1024px) and (orientation: landscape) {
   .container {
     margin: 0;
     padding: 0;
