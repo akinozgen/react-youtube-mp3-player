@@ -1,61 +1,62 @@
 export default function reducer(state, action) {
+  let newState = state;
 
   switch (action.type) {
     case 'updatePlaylists':
-      return { ...state, playlists: action.payload }
+      newState = { ...state, playlists: action.payload }
       break;
 
     case 'updateCurrentSong':
-      return {
+      newState = {
         ...state,
         current_song: action.payload
       };
       break;
 
     case 'updateQueue':
-      return {
+      newState = {
         ...state,
         queue: action.payload
       };
       break;
     case 'shuffleQueue':
-      return {
+      newState = {
         ...state,
         queue: action.payload
       };
       break;
 
     case 'updateSearchResults':
-      return {
+      newState = {
         ...state,
         search_results: action.payload
       };
       break;
 
     case 'updateSearchQuery':
-      return { ...state, search_query: action.payload };
+      newState = { ...state, search_query: action.payload };
       break;
 
     case 'updateIsPlaying':
-      return { ...state, is_playing: action.payload }
+      newState = { ...state, is_playing: action.payload }
       break;
 
     case 'updateQueuePosition':
-      return { ...state, queue_position: action.payload };
+      newState = { ...state, queue_position: action.payload };
       break;
 
     case 'updateCurrentSongUrl':
-      return { ...state, current_song_url: action.payload };
+      newState = { ...state, current_song_url: action.payload };
       break;
 
     case 'updateProgress':
-      return { ...state, progress: action.payload };
+      newState = { ...state, progress: action.payload };
       break;
 
     default:
 
       break;
-  }
+  } // end-switch
 
-
+  return newState;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import Store from '../../context';
 
 export default function PlaylistItem(pls) {
@@ -20,6 +20,3 @@ export default function PlaylistItem(pls) {
     </span>
   </li>;
 }
-
-
-

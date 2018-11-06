@@ -73,6 +73,7 @@ export default function Controls() {
     dispatch({ type: 'shuffleQueue', payload: newQueue });
   }
 
+  // eslint-disable-next-line
   function repeat() {
     // to be implemented
   }
