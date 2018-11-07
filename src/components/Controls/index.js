@@ -70,9 +70,12 @@ export default function Controls() {
     dispatch({ type: 'shuffleQueue', payload: newQueue });
   }
 
-  // eslint-disable-next-line
-  function repeat() {
-    // to be implemented
+  function volumeChange() {
+    const volume = window.audioPlayer.volume;
+    if (volume === 1) window.audioPlayer.volume = (0.5);
+    else if (volume === 0.5) window.audioPlayer.volume = (0);
+    else if (volume === 0) window.audioPlayer.volume = (1);
+    else window.audioPlayer.volume = (1);
   }
 
   function save() {
@@ -126,8 +129,8 @@ export default function Controls() {
     <button className="btn btn-warning control-button text-white" onClick={forward}>
       <i className="fa fa-forward"></i>
     </button>
-    <button className="btn btn-transparent control-button playlist-action text-white">
-      <i className="fa fa-redo-alt"></i>
+    <button className="btn btn-transparent control-button playlist-action text-white" onClick={volumeChange}>
+      <i className="fa fa-volume-up"></i>
     </button>
     <button className="btn btn-transparent control-button playlist-action text-white" onClick={clear}>
       <i className="fa fa-trash"></i>
