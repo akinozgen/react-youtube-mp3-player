@@ -109,6 +109,8 @@ export default function Controls() {
       ref={_ => window.audioPlayer = _}
       autoPlay
       onEnded={forward}
+      onPaused={pause}
+      onStarted={play}
       onLoadStart={_ => {
         _.target.ontimeupdate = onTimeUpdate;
         _.target.onerror = onLoadError;
