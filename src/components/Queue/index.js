@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import {
   SortableContainer,
   SortableElement,
@@ -12,7 +12,6 @@ import Handle from './handle';
 
 export default function Queue() {
   const { state, dispatch } = useContext(Store);
-  const [queue, updateQueue] = useState(state.queue);
 
   const DragHandle = SortableHandle(() => <Handle />);
 
@@ -30,7 +29,7 @@ export default function Queue() {
 
   function onSortEnd({oldIndex, newIndex}) {
     if (oldIndex === newIndex) return;
-    const newQueue = arrayMove(queue, oldIndex, newIndex);
+    const newQueue = arrayMove(state.queue, oldIndex, newIndex);
     let newQueuePosition = state.queue_position;
 
     if (oldIndex === newQueuePosition) {
@@ -43,9 +42,7 @@ export default function Queue() {
 
     dispatch({ type: 'updateQueue', payload: newQueue });
     dispatch({ type: 'updateQueuePosition', payload: newQueuePosition });
-
-    updateQueue(newQueue)
   }
 
-  return <SortableList getContainer={() => document.querySelector('.tab-content')} items={queue} useDragHandle={true} onSortEnd={onSortEnd} />;
+  return <SortableList getContainer={() => document.querySelector('.tab-content')} items={state.queue} useDragHandle={true} onSortEnd={onSortEnd} />;
 }

@@ -28,6 +28,14 @@
     crossorigin="anonymous"></script>
   <script>
     $('[data-toggle="tooltip"]').tooltip();
+
+		setTimeout(() => {
+      $(".tab-content").bind("DOMSubtreeModified", function() {
+        if ($('.tab-content .show.active').length > 1) {
+          $('.tab-content .show.active:first-child').removeClass('show').removeClass('active');
+        }
+  		})
+    }, 1000);
   </script>
 </body>
 

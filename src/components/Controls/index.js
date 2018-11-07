@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import Store from '../../context';
 import API_CONFIG from '../../api_config';
 
@@ -8,8 +8,6 @@ export function array_shuffle(o) {
 
 export default function Controls() {
   const { state, dispatch } = useContext(Store);
-  const [queuePosition, updateQueuePosition] = useState(state.queue_position || 0);
-  const [audioUrl, updateAudioUrl] = useState(state.current_song_url);
 
   function changePlayStatus() {
     if (state.is_playing) pause();
@@ -25,24 +23,21 @@ export default function Controls() {
   }
 
   function changeQueuePosition(newPosition) {
-    updateQueuePosition(newPosition);
     dispatch({ type: 'updateQueuePosition', payload: newPosition });
     // dispatch({ type: 'updateCurrentSong', payload: state.queue[newPosition] });
     play(newPosition);
   }
 
   function play(position = null) {
-    const currentSong = state.queue[position !== null ? position : queuePosition];
+    const currentSong = state.queue[position !== null ? position : state.queue_position];
     const newAudioUrl = API_CONFIG.yt_mp3_endpoint({ videoId: currentSong.id.videoId });
 
     dispatch({ type: 'updateCurrentSong', payload: currentSong });
     dispatch({ type: 'updateIsPlaying', payload: true });
     dispatch({ type: 'updateCurrentSongUrl', payload: newAudioUrl });
 
-    updateAudioUrl(newAudioUrl);
-
     if (typeof window.audioPlayer === 'object' && window.audioPlayer.src !== newAudioUrl)
-      window.audioPlayer.src = audioUrl;
+      window.audioPlayer.src = state.current_song_url;
 
     if (typeof window.audioPlayer === 'object')
       window.audioPlayer.play();
@@ -68,8 +63,8 @@ export default function Controls() {
   function shuffle() {
     if (state.queue.length === 0) return;
 
-    const beforeCurrent = state.queue.slice(0, queuePosition);
-    const afterCurrent = state.queue.slice(queuePosition + 1, state.queue.length);
+    const beforeCurrent = state.queue.slice(0, state.queue_position);
+    const afterCurrent = state.queue.slice(state.queue_position + 1, state.queue.length);
 
     const newQueue = [...beforeCurrent, state.current_song, ...array_shuffle(afterCurrent)];
     dispatch({ type: 'shuffleQueue', payload: newQueue });
@@ -94,7 +89,9 @@ export default function Controls() {
     dispatch({ type: 'updateQueue', payload: [] });
     dispatch({ type: 'updateIsPlaying', payload: false });
     dispatch({ type: 'updateCurrentSong', payload: null });
+    dispatch({ type: 'updateCurrentSongUrl', payload: null });
     dispatch({ type: 'updateQueuePosition', payload: 0 });
+    dispatch({ type: 'updateProgress', payload: 0 });
   }
 
   function onLoadError(_) {
@@ -105,7 +102,7 @@ export default function Controls() {
 
   return <div className="controls">
     <audio
-      src={audioUrl}
+      src={state.current_song_url}
       ref={_ => window.audioPlayer = _}
       autoPlay
       onEnded={forward}
