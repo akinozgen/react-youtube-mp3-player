@@ -1,3 +1,6 @@
+// ref. https://codesandbox.io/s/qz9wrzry44
+//      https://codesandbox.io/u/f
+
 import { useEffect } from 'react';
 
 export function usePersistedContext(context, key = 'state') {
