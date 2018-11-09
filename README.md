@@ -10,6 +10,30 @@ Play videos as audio from youtube. Create queue, save queues as playlists. Expor
   
 </div>
 
+--------
+
+* ## Table Of Contents
+  * [Building](#build-from-source)
+   * [Demo](#checkout-demo)
+   * [Development](#development)
+   * [React Hooks](#react-hooks)
+   * [Persistent Storage](#persistent-storage)
+   * [State Structure](#state-structure)
+   * [Reducers](#reducers)
+   * [Gluing Together](#gluing-together)
+    * [Deep Dive](#deep-diving)
+      * [Components](#1-components)
+        * [Container](#container)
+        * [Player](#player)
+        * [Cover](#cover)
+        * [Meta](#meta)
+        * [Controls](#controls)
+        * [Playlist Manager](#playlist-manager)
+        * [Queue](#queue)
+        * [Search](#search)
+      * [Out of Context Components](#outside-of-the-context-components)
+        * [API Config](#api-config)
+      
 ## Build from source
 
 * Clone Repo:
@@ -34,15 +58,16 @@ $ npm run build
 ```
 
 ### Checkout demo
-[Click To See Demo](http://yt-mp3.surge.sh/)
+[🔱 Click To See Demo](http://yt-mp3.surge.sh/)
 
 
 ### Development
-[React Hooks:](https://reactjs.org/docs/hooks-intro.html)
+[🔱 React Hooks](https://reactjs.org/docs/hooks-intro.html)
 > Hooks are a new feature proposal that lets you use state and other React features without writing a class.
 
 ----------
-[Persistent Storage](https://github.com/akinozgen/ytmp3/blob/master/src/usePersist.js) 
+#### Persistent Storage
+[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/usePersist.js) 
 
 This app uses browsers `localStorage` as persistent storage. In further updates, it will use firebase realtime database for storing data. With firebase authentication and storage, this will be a social music player. 
 
@@ -67,7 +92,8 @@ export function usePersistedReducer([state, dispatch], key = 'state') {
 ```
 ----------
 
-[State Structure](https://github.com/akinozgen/ytmp3/blob/master/src/context.js)
+#### State Structure
+[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/context.js)
 
 Initial state structure looks like this. Every possible variable defined with their default values so lifecycle can't get broken because of empty state variables etc. 
 
@@ -90,7 +116,8 @@ export default Store;
 ```
 
 --------
-[Reducers](https://github.com/akinozgen/ytmp3/blob/master/src/reducer.js)
+#### Reducers
+[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/reducer.js)
 
 All reducers does the same work. They take original state and modified variable, spread original state and replace given variable at the end of the object.
 
@@ -112,8 +139,8 @@ export default function reducer(state, action) {
 ```
 
 ----------
-
-[Gluing Together](https://github.com/akinozgen/ytmp3/blob/master/src/App.js)
+#### Gluing Together
+[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/App.js)
 
 In app function (component), registering state to localStorage as i mentioned before and wraps applications main component with store provider.
 
@@ -145,8 +172,8 @@ export default App;
 
 ### Deep Diving
 #### 1. Components
-
-[Container](https://github.com/akinozgen/ytmp3/blob/master/src/components/Container/index.js)
+##### Container
+[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/components/Container/index.js)
 
 Just a basic container div for wrapping application context.
 
@@ -157,8 +184,8 @@ const Container = _ => <div className="container">{_.children}</div>;
 
 export default Container;
 ```
-
-[Player]()
+##### Player
+[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/components/Player/index.js)
 
 Player component used for getting every dynamic components together. For tab view i used bootstraps tab panel component with jquery.
 
@@ -192,7 +219,8 @@ export function Player() {
 }
 ```
 
-[Cover](https://github.com/akinozgen/ytmp3/blob/master/src/components/Cover/index.js)
+##### Cover
+[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/components/Cover/index.js)
 
 Cover component shows cover of video. Just this.
 
@@ -214,7 +242,8 @@ export default function Cover() {
 }
 ```
 
-[Meta](https://github.com/akinozgen/ytmp3/blob/master/src/components/Meta/index.js)
+##### Meta
+[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/components/Meta/index.js)
 
 Meta components show title of video and current player duration. Duration value comes from state so component don't have to mess with outside dom elements.
 `getTitle` function exported because of further usings.
@@ -243,7 +272,8 @@ export default function Meta() {
 }
 ```
 
-[Controls](https://github.com/akinozgen/ytmp3/blob/master/src/components/Controls/index.js)
+##### Controls
+[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/components/Controls/index.js)
 
 Controls does every single player based functions. Play, pause, forward, backward, clear, save, shuffle etc. 
 
@@ -331,7 +361,8 @@ export default function Controls() {
 
 ```
 
-[Playlist Manager](https://github.com/akinozgen/ytmp3/blob/master/src/components/PlaylistManager/index.js)
+##### Playlist Manager
+[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/components/PlaylistManager/index.js)
 
 Playlist manager takes playlist data from state and renders as a list. Every list item has sub-list group with song list items. 
 
@@ -349,7 +380,8 @@ export default function PlaylistManager() {
 }
 ```
 
-[Queue](https://github.com/akinozgen/ytmp3/blob/master/src/components/Queue/index.js)
+##### Queue
+[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/components/Queue/index.js)
 
 Queue is a queue manager. It takes queue items from store renders them with a drag handle. `onSortEnd` function takes old index of dragged object, new index of dragged object and queue from state. Changes dragged items index with new index and saves to store.
 
@@ -388,7 +420,8 @@ export default function Queue() {
 }
 ```
 
-[Search](https://github.com/akinozgen/ytmp3/blob/master/src/components/Search/index.js)
+##### Search
+[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/components/Search/index.js)
 
 Search component searchs and lists result as a list group. Also search item sub component has add to queue option. Search query and results are stored to `localStorage`.
 
@@ -428,9 +461,10 @@ export default function Search() {
 
 -----------
 
-## Outside of the context components
+#### Outside of the context components
 
-[Api Config](https://github.com/akinozgen/ytmp3/blob/master/src/api_config.js)
+##### Api Config
+[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/api_config.js)
 
 Api config gives api endpoints with function calls
 
