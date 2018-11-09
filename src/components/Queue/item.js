@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import Store from '../../context';
+import API_CONFIG from '../../ApiConfig';
 
 export default function Item(item) {
   const { state, dispatch } = useContext(Store);
 
-  const { queue_position } = state;
-  const current = item.index === queue_position;
-  
+  const current = item.index === state.queue_position;
+
   function remove() {
     const newQueue = state.queue.filter((_, i) => i !== item.index);
     dispatch({ type: 'updateQueue', payload: newQueue })
@@ -18,7 +18,14 @@ export default function Item(item) {
     }
   }
 
-  return <li className={`list-group-item ${current ? 'active' : ''}`}>
+  function play() {
+    dispatch({ type: 'updateQueuePosition', payload: item.index });
+    dispatch({ type: 'updateCurrentSong', payload: state.queue.filter((_, i) => i === item.index)[0] });
+    dispatch({ type: 'updateCurrentSongUrl', payload: API_CONFIG.yt_mp3_endpoint({ videoId: item.id.videoId }) });
+    dispatch({ type: 'updateIsPlaying', payload: true });
+  }
+
+  return <li className={`list-group-item ${current ? 'active' : ''}`} onDoubleClick={play}>
     <span>
       {item.children}
     </span>
