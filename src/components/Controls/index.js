@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Store from '../../context';
-import API_CONFIG from '../../api_config';
+import API_CONFIG from '../../ApiConfig';
 
 export function array_shuffle(o) {
   return o.sort(function () { return 0.5 - Math.random() });

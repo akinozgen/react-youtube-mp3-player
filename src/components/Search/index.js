@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import Store from '../../context';
 
-import API_CONFIG from '../../api_config';
+import API_CONFIG from '../../ApiConfig';
 import Axios from 'axios';
 import Item from './item';
 

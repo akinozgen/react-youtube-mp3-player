@@ -281,7 +281,7 @@ Controls does every single player based functions. Play, pause, forward, backwar
 ```javascript
 import React, { useContext } from 'react';
 import Store from '../../context';
-import API_CONFIG from '../../api_config';
+import API_CONFIG from '../../ApiConfig';
 
 export function array_shuffle(o) {
   return o.sort(function () { return 0.5 - Math.random() });
@@ -465,7 +465,7 @@ export default function Search() {
 #### Outside of the context components
 
 ##### Api Config
-[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/api_config.js)
+[🔱 file](https://github.com/akinozgen/ytmp3/blob/master/src/ApiConfig.js)
 
 Api config gives api endpoints with function calls
 
