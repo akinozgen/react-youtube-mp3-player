@@ -241,6 +241,10 @@ body {
   -webkit-filter: blur(8px);
 }
 
+[role="tablist"] .fa {
+  margin-right: 5px;
+}
+
 @media only screen and (max-width: 480px) {
   .container {
     margin: 0;
