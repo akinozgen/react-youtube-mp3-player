@@ -110,6 +110,12 @@ export default function Controls() {
     }
   }
 
+  document.onkeydown = event => {
+    if (event.keyCode !== 32) return;
+
+    changePlayStatus();
+  }
+
   return <div className="controls">
     <audio
       src={state.current_song_url}
