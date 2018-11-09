@@ -6,7 +6,7 @@ Play videos as audio from youtube. Create queue, save queues as playlists. Expor
 
 <div align="center">
   
-![Overview](https://github.com/akinozgen/react-youtube-mp3-player/blob/master/ss/ssmobile.png?raw=true)
+<img src="https://github.com/akinozgen/react-youtube-mp3-player/blob/master/ss/ssmobile.png?raw=true" alt="YTMP3 (YouTube MP3 Player)" />
   
 </div>
 
