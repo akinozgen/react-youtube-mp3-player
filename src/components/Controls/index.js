@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Store from '../../context';
 import API_CONFIG from '../../ApiConfig';
 
@@ -8,6 +8,7 @@ export function array_shuffle(o) {
 
 export default function Controls() {
   const { state, dispatch } = useContext(Store);
+  const [volumeIcon, updateVolumeIcon] = useState('fa-volume-up');
 
   function changePlayStatus() {
     if (state.is_playing) pause();
@@ -72,10 +73,16 @@ export default function Controls() {
 
   function volumeChange() {
     const volume = window.audioPlayer.volume;
-    if (volume === 1) window.audioPlayer.volume = (0.5);
-    else if (volume === 0.5) window.audioPlayer.volume = (0);
-    else if (volume === 0) window.audioPlayer.volume = (1);
-    else window.audioPlayer.volume = (1);
+    if (volume === 1) {
+      window.audioPlayer.volume = (0.5);
+      updateVolumeIcon('fa-volume-down');
+    } else if (volume === 0.5) {
+      window.audioPlayer.volume = (0);
+      updateVolumeIcon('fa-volume-mute');
+    } else {
+      window.audioPlayer.volume = (1);
+      updateVolumeIcon('fa-volume-up');
+    }
   }
 
   function save() {
@@ -132,7 +139,7 @@ export default function Controls() {
       <i className="fa fa-forward"></i>
     </button>
     <button className="btn btn-transparent control-button playlist-action text-white" onClick={volumeChange}>
-      <i className="fa fa-volume-up"></i>
+      <i className={`fa ${volumeIcon}`}></i>
     </button>
     <button className="btn btn-transparent control-button playlist-action text-white" onClick={clear}>
       <i className="fa fa-trash"></i>
