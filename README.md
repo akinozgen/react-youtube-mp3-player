@@ -4,7 +4,11 @@ MP3 Player powered with youtube database.
 
 Play videos as audio from youtube. Create queue, save queues as playlists. Export and share playlists, import shared playlists and more... 
 
-![Overview](https://github.com/akinozgen/react-youtube-mp3-player/blob/master/ss/ssmobile.png?raw=true)
+<div align="center">
+  
+  ![Overview](https://github.com/akinozgen/react-youtube-mp3-player/blob/master/ss/ssmobile.png?raw=true)
+  
+</div>
 
 ## Build from source
 
