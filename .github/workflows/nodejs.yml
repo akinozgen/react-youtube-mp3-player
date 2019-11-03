@@ -14,5 +14,5 @@ jobs:
           node-version: 8
       - run: npm install -g surge
       - run: npm install
-      - run: npm build
+      - run: npm run-script build
       - run: surge build yt-mp3.surge.sh --token ${{ secrets.surge_token }}
