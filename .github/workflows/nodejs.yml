@@ -1,20 +1,16 @@
-name: Node CI
+name: Deploy Website
 
 on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [10.x]
-
+    name: Deploying to surge
     steps:
-    - uses: dswistowski/surge-sh-action@v1
-    - with:
-        domain: 'yt-mp3.surge.sh'
-        project: '.'
-        login: ${{ secrets.surge_login }}
-        token: ${{ secrets.surge_token }}
+      - uses: actions/checkout@v1
+      - name: Install surge and fire deployment
+        uses: actions/setup-node@v1
+        with:
+          node-version: 8
+      - run: npm install -g surge
+      - run: surge ./ yt-mp3.surge.sh --token ${{ secrets.surge_token }}
