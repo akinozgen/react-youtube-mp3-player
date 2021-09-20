@@ -10,7 +10,7 @@ Play videos as audio from youtube. Create queue, save queues as playlists. Expor
   
 </div>
 
-Requies an express server. Here is server repo [akinozgen/yt-mp3-server](https://github.com/akinozgen/yt-mp3-server)
+Requies an express server. Here is server repo [akinozgen/ytmp3-node](https://github.com/akinozgen/ytmp3-node)
 --------
 
 * ## Table Of Contents
