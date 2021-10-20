@@ -15,7 +15,7 @@ Play videos as audio from youtube. Create queue, save queues as playlists. Expor
 
 ### For Server
 1. Clone this repo
-2. Run `git submodule init`
+2. Run `git submodule update --init --recursive`
 3. Cd into `ytmp3-node`
 4. Run `npm install` or `yarn` to install dependencies
 5. Run `npm start` or `yarn start` to start youtube to mp3 server
