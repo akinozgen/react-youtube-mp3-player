@@ -10,7 +10,24 @@ Play videos as audio from youtube. Create queue, save queues as playlists. Expor
   
 </div>
 
-Requies an express server. Here is server repo [akinozgen/ytmp3-node](https://github.com/akinozgen/ytmp3-node)
+
+## Install Instructions
+
+### For Server
+1. Clone this repo
+2. Run `git submodule init`
+3. Cd into `ytmp3-node`
+4. Run `npm install` or `yarn` to install dependencies
+5. Run `npm start` or `yarn start` to start youtube to mp3 server
+
+### For Client
+1. Cd into this projects directory and run `npm install` or `yarn` to install dependencies.
+2. Run this command to create your api config `cp src/ApiConfig.example.js src/ApiConfig.js`
+3. Edit your `src/ApiConfig.js`. Enter your YouTube Data API key to `yt_api_key` property.
+4. Edit your `yt_mp3_endpoint` url to the servers url you just configured above.
+4. Run `npm start` or `yarn start` to start application
+5. Search any song you want from the search panel and add to your queue. If everything is correct then it will start playing automatically.
+
 --------
 
 * ## Table Of Contents
