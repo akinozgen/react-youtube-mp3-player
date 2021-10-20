@@ -1,0 +1,3 @@
+[submodule "ytmp3-node"]
+	path = ytmp3-node
+	url = https://github.com/akinozgen/ytmp3-node
