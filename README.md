@@ -32,7 +32,6 @@ Play videos as audio from youtube. Create queue, save queues as playlists. Expor
 
 * ## Table Of Contents
   * [Building](#build-from-source)
-   * [Demo](#checkout-demo)
    * [Development](#development)
    * [React Hooks](#react-hooks)
    * [Persistent Storage](#persistent-storage)
@@ -74,10 +73,6 @@ or
 ```
 $ npm run build
 ```
-
-### Checkout demo
-[🔱 Click To See Demo](http://yt-mp3.surge.sh/)
-
 
 ### Development
 #### React Hooks
